@@ -1,7 +1,7 @@
 -- This will automatically update with every new Vehicle that is added assuming there isn't a change to the names of GUI's.
 -- Made by OneFool#7876
 
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/OneFool/intro/main/custom%20intro%20orion')))()
 
 local Window = OrionLib:MakeWindow({
     Name = "✈️ Plane crash physics 2",
