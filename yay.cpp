@@ -9,7 +9,7 @@ int main(){
 
     std::cout << "What's your full name?: ";
     std::getline(std::cin, name);
-    std::cout << "What's youre age? ";
+    std::cout << "What's your age? ";
     std::cin >> age;
 
     std::cout << "Hello " << name << '\n';
