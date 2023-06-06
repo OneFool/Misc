@@ -3,5 +3,8 @@
 :: This will close out all instances of spotify which task manager usually doesn't do if Spotify is bugged resulting in;
 :: the "Spotify is not responding" message when you try to re-launch it.
 
-taskkill /f /im Spotify.exe /T > nul :: Close out Spotify
-START C:\Users\OneFool\AppData\Roaming\Spotify\Spotify.exe :: Re-Launch Spotify, make sure to replace the example path with your Spotify.exe path
+:: Kill all instances of Spotify.
+taskkill /f /im Spotify.exe /T > nul
+
+:: Re-Launch Spotify, Make sure to replace the example path with your Spotify.exe path.
+START C:\Users\OneFool\AppData\Roaming\Spotify\Spotify.exe
