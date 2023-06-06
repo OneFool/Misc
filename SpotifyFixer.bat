@@ -1,5 +1,5 @@
 :: SpotifyFixer by OneFool#7876
-:: Use this if your spotify bugs out and you can't pause/play music etc.
+:: Use this if your Spotify bugs out and you can't pause/play music etc.
 :: This will close out all instances of Spotify which task manager usually doesn't do if Spotify is bugged resulting in;
 :: the "Spotify is not responding" message when you try to re-launch it.
 
