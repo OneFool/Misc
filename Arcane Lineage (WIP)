@@ -1,0 +1,134 @@
+for k, v in pairs(getgc(true)) do
+    if pcall(function() return rawget(v, "indexInstance") end) and type(rawget(v, "indexInstance")) == "table" and (rawget(v, "indexInstance"))[1] == "kick" then
+        v.tvk = { "kick", function() return game.Workspace:WaitForChild("") end }
+    end
+end
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/OneFool/intro/main/custom%20intro%20orion')))()
+local Window = OrionLib:MakeWindow({
+    Name = "Fool Hub | Arcane Lineage",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "FoolArcLin"
+})
+
+local Local = Window:MakeTab({
+    Name = "Local",
+    Icon = "rbxassetid://5009915795",
+    PremiumOnly = false
+})
+
+local PlayerSec = Local:AddSection({
+    Name = "Player"
+})
+
+PlayerSec:AddToggle({
+    Name = "No Fall-DMG",
+    Default = false,
+    Callback = function(Value)
+        getgenv().NoFall = (Value)
+
+        local OldNameCall = nil
+        OldNameCall = hookmetamethod(game, "__namecall", function(self, ...)
+            local Arg = { ... }
+            if self.Name == "EnviroEffects" and NoFall then
+                return
+            end
+            return OldNameCall(self, ...)
+        end)
+    end
+})
+
+PlayerSec:AddButton({
+    Name = "Heal At Doctor",
+    Callback = function()
+        local oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Doctor.Head
+            .CFrame
+        task.wait(0.4)
+        fireproximityprompt(game:GetService("Workspace").NPCs.Doctor.Head.ProximityPrompt)
+        game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("NPCDialogue")
+        game:GetService("Players").LocalPlayer.PlayerGui.NPCDialogue.RemoteEvent:FireServer(game:GetService("Players")
+            .LocalPlayer.PlayerGui.NPCDialogue.BG.Options.Option)
+        task.wait(0.4)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
+    end
+})
+
+local CombatSec = Local:AddSection({
+    Name = "Combat"
+})
+
+CombatSec:AddToggle({
+    Name = "Auto-Dodge",
+    Default = false,
+    Callback = function(Value)
+        getgenv().AutoDodge = (Value)
+
+        while AutoDodge do
+            task.wait()
+            if game:GetService("Players").LocalPlayer.PlayerGui.Combat.Block.Visible == true then
+                local ohTable1 = {
+                    [1] = true,
+                    [2] = true
+                }
+                local ohString2 = "DodgeMinigame"
+
+                game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohTable1, ohString2)
+                task.wait()
+            end
+        end
+    end
+})
+
+CombatSec:AddToggle({
+    Name = "Auto-QTE",
+    Default = false,
+    Callback = function(Value)
+        getgenv().AutoQTE = (Value)
+        local BaseClass = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("StatMenu").Holder.BaseClassVal
+            .Text
+
+        while AutoQTE do
+            task.wait()
+
+            -- Wizard
+            if BaseClass == "Wizard" and game:GetService("Players").LocalPlayer.PlayerGui.Combat.MagicQTE.Visible == true then
+                local ohBoolean1 = true
+                local ohString2 = "MagicQTE"
+                game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
+                game:GetService("Players").LocalPlayer.PlayerGui.Combat.MagicQTE.Visible = false
+
+                -- Thief
+            elseif BaseClass == "Thief" and game:GetService("Players").LocalPlayer.PlayerGui.Combat.DaggerQTE.Visible == true then
+                local ohBoolean1 = true
+                local ohString2 = "DaggerQTE"
+                game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
+                game:GetService("Players").LocalPlayer.PlayerGui.Combat.DaggerQTE.Visible = false
+
+                -- Slayer
+            elseif BaseClass == "Slayer" then
+                local ohBoolean1 = true
+                local ohString2 = "SpearQTE"
+                game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
+                game:GetService("Players").LocalPlayer.PlayerGui.Combat.SpearQTE.Visible = false
+                -- Fist
+            elseif BaseClass == "Martial Artist" and game:GetService("Players").LocalPlayer.PlayerGui.Combat.FistQTE.Visible == true then
+                local ohBoolean1 = true
+                local ohString2 = "FistQTE"
+                game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
+                game:GetService("Players").LocalPlayer.PlayerGui.Combat.FistQTE.Visible = false
+                -- Sword
+            elseif BaseClass == "Warrior" and game:GetService("Players").LocalPlayer.PlayerGui.Combat.SwordQTE.Visible == true then
+                local ohBoolean1 = true
+                local ohString2 = "SwordQTE"
+                game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
+                game:GetService("Players").LocalPlayer.PlayerGui.Combat.SwordQTE.Visible = false
+                task.wait()
+            end
+        end
+    end
+})
+
+OrionLib:Init()
