@@ -6,6 +6,18 @@ for k, v in pairs(getgc(true)) do
         v.tvk = { "kick", function() return game.Workspace:WaitForChild("") end }
     end
 end
+for i, v in next, getgc() do
+    if typeof(v) == "function" and islclosure(v) and not isexecutorclosure(v) then
+        local Constants = debug.getconstants(v)
+        if table.find(Constants, "Detected") and table.find(Constants, "crash") then
+            setthreadidentity(2)
+            hookfunction(v, function()
+                return task.wait(9e9)
+            end)
+            setthreadidentity(7)
+        end
+    end
+end
 -- End Adonis Bypasses
 
 local NPCList = {}
@@ -592,6 +604,35 @@ Teleports:AddDropdown({
                 TweenInfo.new(Time), { CFrame = CFrameEnd })
             tween:Play()
         end
+    end
+})
+
+local Misc = Window:MakeTab({
+    Name = "Misc",
+    Icon = "rbxassetid://12614663538",
+    PremiumOnly = false
+})
+
+local Rollback = Misc:AddSection({
+    Name = "Enable Rollback then drop the item(s) to another account then rejoin"
+})
+
+Rollback:AddButton({
+    Name = "Rollback Data",
+    Callback = function()
+        while task.wait() do
+            game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(workspace)
+            print("active")
+        end
+    end
+})
+
+Rollback:AddButton({
+    Name = "Rejoin",
+    Callback = function()
+        local ts = game:GetService("TeleportService")
+        local p = game:GetService("Players").LocalPlayer
+        ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, p)
     end
 })
 
