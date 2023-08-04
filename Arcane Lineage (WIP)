@@ -465,6 +465,56 @@ Brew:AddToggle({
     end
 })
 
+local Merchant = Window:MakeTab({
+    Name = "Merchant",
+    Icon = "rbxassetid://12614663538",
+    PremiumOnly = false
+})
+
+Merchant:AddToggle({
+    Name = "Merchant Notifier",
+    Default = false,
+    Save = true,
+    Flag = "MerchantNoti",
+    Callback = function(Value)
+        getgenv().MerchNoti = (Value)
+
+        while MerchNoti do
+            task.wait()
+            if game:GetService("Workspace").NPCs:FindFirstChild("Mysterious Merchant") then
+                OrionLib:MakeNotification({
+                    Name = "Merchant Detected!",
+                    Content = "The Mysterious Merchant Is Spawned",
+                    Image = "rbxassetid://12614663538",
+                    Time = 5
+                })
+                task.wait(5)
+            end
+        end
+    end
+})
+
+Merchant:AddButton({
+    Name = "Check For Merchant",
+    Callback = function()
+        if game:GetService("Workspace").NPCs:FindFirstChild("Mysterious Merchant") then
+            OrionLib:MakeNotification({
+                Name = "Merchant Detected!",
+                Content = "The Mysterious Merchant Is Spawned",
+                Image = "rbxassetid://12614663538",
+                Time = 4
+            })
+        else
+            OrionLib:MakeNotification({
+                Name = "No Merchant Detected",
+                Content = "The Mysterious Merchant Is Not Spawned",
+                Image = "rbxassetid://12614663538",
+                Time = 4
+            })
+        end
+    end
+})
+
 -- Teleports
 
 local Teleports = Window:MakeTab({
