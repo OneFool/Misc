@@ -484,7 +484,7 @@ Merchant:AddToggle({
             if game:GetService("Workspace").NPCs:FindFirstChild("Mysterious Merchant") then
                 OrionLib:MakeNotification({
                     Name = "Merchant Detected!",
-                    Content = "The Mysterious Merchant Is Spawned",
+                    Content = "The Mysterious Merchant Is Spawned!",
                     Image = "rbxassetid://12614663538",
                     Time = 5
                 })
@@ -495,19 +495,15 @@ Merchant:AddToggle({
 })
 
 Merchant:AddButton({
-    Name = "Check For Merchant",
+    Name = "Teleport To Merchant",
     Callback = function()
         if game:GetService("Workspace").NPCs:FindFirstChild("Mysterious Merchant") then
-            OrionLib:MakeNotification({
-                Name = "Merchant Detected!",
-                Content = "The Mysterious Merchant Is Spawned",
-                Image = "rbxassetid://12614663538",
-                Time = 4
-            })
+            lp.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs:FindFirstChild(
+                "Mysterious Merchant").HumanoidRootPart.CFrame
         else
             OrionLib:MakeNotification({
-                Name = "No Merchant Detected",
-                Content = "The Mysterious Merchant Is Not Spawned",
+                Name = "No Merchant Detected!",
+                Content = "Cannot Teleport To Merchant, Not Spawned!",
                 Image = "rbxassetid://12614663538",
                 Time = 4
             })
