@@ -1,12 +1,12 @@
--- THIS SCRIPT WAS MADE FOR PERSONAL USE MEANING IT HAS VERY LITTLE OPTIMIZATION AND ONLY HAS FEATURES THAT I NEED FOR THIS GAME EX: Auto Brew only has the potions I have a use for.
+-- THIS SCRIPT WAS MADE FOR PERSONAL USE MEANING IT HAS VERY LITTLE OPTIMIZATION AND ONLY HAS FEATURES THAT I NEED FOR THIS GAME EX: Auto Brew only has the potions I have a use for and others most likely will not be added.
 
--- Not my adonis bypass - Everything else made by me (OneFool)
+-- Not my adonis bypasses - Everything else made by me (OneFool)
 for k, v in pairs(getgc(true)) do
     if pcall(function() return rawget(v, "indexInstance") end) and type(rawget(v, "indexInstance")) == "table" and (rawget(v, "indexInstance"))[1] == "kick" then
         v.tvk = { "kick", function() return game.Workspace:WaitForChild("") end }
     end
 end
--- End Adonis Bypass
+-- End Adonis Bypasses
 
 local NPCList = {}
 local QuestNPCList = {}
@@ -49,19 +49,17 @@ local Window = OrionLib:MakeWindow({
     ConfigFolder = "FoolArcLin"
 })
 
-local Local = Window:MakeTab({
-    Name = "Local",
+local PlayerSec = Window:MakeTab({
+    Name = "Character",
     Icon = "rbxassetid://5009915795",
     PremiumOnly = false
-})
-
-local PlayerSec = Local:AddSection({
-    Name = "Player"
 })
 
 PlayerSec:AddToggle({
     Name = "No Fall-DMG",
     Default = false,
+    Save = true,
+    Flag = "NoFall",
     Callback = function(Value)
         getgenv().NoFall = (Value)
 
@@ -93,13 +91,65 @@ PlayerSec:AddButton({
     end
 })
 
-local CombatSec = Local:AddSection({
-    Name = "Combat"
+PlayerSec:AddToggle({
+    Name = "Enable Walkspeed",
+    Default = false,
+    Callback = function(Value)
+        Walkspeeder = (Value)
+    end
 })
 
-CombatSec:AddToggle({
+PlayerSec:AddSlider({
+    Name = "Walkspeed",
+    Min = tonumber(lp.Character.Humanoid.WalkSpeed),
+    Max = 250,
+    Default = tonumber(lp.Character.Humanoid.WalkSpeed),
+    Color = Color3.fromRGB(255, 0, 0),
+    Increment = 1,
+    ValueName = "Walkspeed",
+    Callback = function(Value)
+        while Walkspeeder == true do
+            lp.Character.Humanoid.WalkSpeed = (Value)
+            task.wait()
+        end
+    end
+})
+
+PlayerSec:AddToggle({
+    Name = "Enable JumpPower",
+    Default = false,
+    Callback = function(Value)
+        JumpPowerr = (Value)
+    end
+})
+
+PlayerSec:AddSlider({
+    Name = "JumpPower",
+    Min = tonumber(lp.Character.Humanoid.JumpPower),
+    Max = 250,
+    Default = tonumber(lp.Character.Humanoid.JumpPower),
+    Color = Color3.fromRGB(255, 0, 0),
+    Increment = 1,
+    ValueName = "JumpPower",
+    Callback = function(Value)
+        while JumpPowerr == true do
+            lp.Character.Humanoid.JumpPower = (Value)
+            task.wait()
+        end
+    end
+})
+
+local Combat = Window:MakeTab({
+    Name = "Combat",
+    Icon = "rbxassetid://5009915795",
+    PremiumOnly = false
+})
+
+Combat:AddToggle({
     Name = "Auto-Dodge",
     Default = false,
+    Save = true,
+    Flag = "AutoDodge",
     Callback = function(Value)
         getgenv().AutoDodge = (Value)
 
@@ -117,9 +167,11 @@ CombatSec:AddToggle({
     end
 })
 
-CombatSec:AddToggle({
+Combat:AddToggle({
     Name = "Auto-QTE",
     Default = false,
+    Save = true,
+    Flag = "AutoQTE",
     Callback = function(Value)
         getgenv().AutoQTE = (Value)
         local BaseClass = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("StatMenu").Holder.BaseClassVal
@@ -194,7 +246,7 @@ Plants:AddButton({
 
         for _, Trinket in ipairs(trinkets) do
             lp.Character.HumanoidRootPart.CFrame = Trinket.CFrame
-            task.wait(0.55)
+            task.wait(0.35)
             for _, v in pairs(game:GetService("Workspace").SpawnedItems:GetDescendants()) do
                 if v:IsA("ClickDetector") and lp:DistanceFromCharacter(v.Parent.Position) <= 10 then
                     fireclickdetector(v)
