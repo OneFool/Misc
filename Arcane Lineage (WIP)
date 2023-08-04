@@ -10,8 +10,17 @@ end
 
 local NPCList = {}
 local QuestNPCList = {}
+local Moves = {}
 local lp = game.Players.LocalPlayer
 local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3" }
+
+function checkforfight()
+    if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
+        return true
+    else
+        return false
+    end
+end
 
 function getproximity()
     for _, Cauldrons in next, game:GetService("Workspace").Cauldrons:GetDescendants() do
@@ -26,6 +35,12 @@ function getclicker()
         if CauldronsClick:IsA("ClickDetector") then
             fireclickdetector(CauldronsClick)
         end
+    end
+end
+
+for _, Movess in next, lp.PlayerGui.StatMenu.SkillMenu.Actives:GetChildren() do
+    if Movess:IsA("TextButton") then
+        table.insert(Moves, Movess.Name)
     end
 end
 
@@ -48,6 +63,8 @@ local Window = OrionLib:MakeWindow({
     SaveConfig = true,
     ConfigFolder = "FoolArcLin"
 })
+
+-- Character
 
 local PlayerSec = Window:MakeTab({
     Name = "Character",
@@ -139,6 +156,8 @@ PlayerSec:AddSlider({
     end
 })
 
+-- Combat
+
 local Combat = Window:MakeTab({
     Name = "Combat",
     Icon = "rbxassetid://5009915795",
@@ -215,6 +234,54 @@ Combat:AddToggle({
                 task.wait()
             end
         end
+    end
+})
+
+Combat:AddToggle({
+    Name = "Auto-Attack",
+    Default = false,
+    Callback = function(Value)
+        getgenv().AutoAttack = (Value)
+
+        local function performAttack(target)
+            local ohString1 = "Attack"
+            local ohString2 = tostring(MoveToUse)
+            local ohTable3 = {
+                ["Attacking"] = target
+            }
+
+            game:GetService("Players").LocalPlayer.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(
+                ohString1, ohString2, ohTable3)
+        end
+
+        while AutoAttack do
+            task.wait()
+            if checkforfight() then
+                local enemiesToAttack = {}
+                for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
+                    if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name].FightInProgress.Value and Enemies.Parent.Name ~= lp.Name then
+                        table.insert(enemiesToAttack, Enemies.Parent.Name)
+                    end
+                end
+
+                for _, enemyName in ipairs(enemiesToAttack) do
+                    local enemy = game:GetService("Workspace").Living[enemyName]
+                    if enemy then
+                        performAttack(enemy)
+                    end
+                    task.wait(1)
+                end
+            end
+        end
+    end
+})
+
+Combat:AddDropdown({
+    Name = "Auto-Attack Move",
+    Default = "",
+    Options = Moves,
+    Callback = function(Value)
+        MoveToUse = Value
     end
 })
 
