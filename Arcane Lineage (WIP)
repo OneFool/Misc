@@ -25,24 +25,6 @@ for i, v in next, getgc() do
 end
 -- End Adonis Bypasses
 
---Indexes--------------------------------------------
-local gmt = getrawmetatable(game)
-
-setreadonly(gmt, false)
-
-local oldindex = gmt.__index
-
-gmt.__index = newcclosure(function(self, b)
-    if b == "JumpPower" then
-        return game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower
-    elseif b == "WalkSpeed" then
-        return game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed
-    end
-
-    return oldindex(self, b)
-end)
-------------------------End_Indexes------------------------------
-
 ------------------------Anti_AFK----------------------------------
 if getconnections then
     for _, v in next, getconnections(game:GetService("Players").LocalPlayer.Idled) do
