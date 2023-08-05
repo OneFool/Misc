@@ -46,6 +46,7 @@ local QuestNPCList = {}
 local Moves = {}
 local lp = game:GetService("Players").LocalPlayer
 local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3" }
+local aux = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Upbolt/Hydroxide/revision/ohaux.lua"))()
 
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
@@ -121,6 +122,36 @@ PlayerSec:AddToggle({
             end
             return OldNameCall(self, ...)
         end)
+    end
+})
+
+PlayerSec:AddToggle({
+    Name = "Auto-Sprint",
+    Default = false,
+    Save = true,
+    Flag = "AutoSprint",
+    Callback = function(Value)
+        getgenv().AutoSprint = (Value)
+
+        while AutoSprint do
+            local scriptPath = workspace.Living[lp.Name].MovementHandler
+            local closureName = "Sprint"
+            local upvalueIndex = 8
+            local closureConstants = {
+                [1] = "Effects",
+                [2] = "Stunned",
+                [3] = "FindFirstChild",
+                [4] = "NoSprint",
+                [5] = "FightInProgress",
+                [6] = "HumanoidRootPart"
+            }
+
+            local closure = aux.searchClosure(scriptPath, closureName, upvalueIndex, closureConstants)
+            local value = 2
+
+            debug.setupvalue(closure, upvalueIndex, value)
+            task.wait()
+        end
     end
 })
 
