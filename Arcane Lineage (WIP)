@@ -673,7 +673,7 @@ local Misc = Window:MakeTab({
 })
 
 local Rollback = Misc:AddSection({
-    Name = "Enable Rollback then drop the item(s) to another account then rejoin"
+    Name = "Enable then drop the item(s) to another account then rejoin/leave"
 })
 
 Rollback:AddButton({
@@ -681,6 +681,19 @@ Rollback:AddButton({
     Callback = function()
         while task.wait() do
             game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(workspace)
+            print("Rollback Setup")
+        end
+    end
+})
+
+Rollback:AddButton({
+    Name = "Rollback Data Method 2",
+    Callback = function()
+        while task.wait() do
+            local ohTable1 = {
+                ["1"] = "\255"
+            }
+            game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohTable1)
             print("Rollback Setup")
         end
     end
