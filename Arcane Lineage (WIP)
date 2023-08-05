@@ -398,7 +398,7 @@ Brew:AddToggle({
             Workspace.CurrentCamera.CameraType = "Scriptable"
             task.wait(0.1)
 
-            if Potion == "Heartbreaking Elixir" and AutoBrew then
+            if Potion == "Heartbreaking Elixir" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Carnastool") then
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
@@ -417,7 +417,7 @@ Brew:AddToggle({
                 getproximity()
                 task.wait(0.1)
                 getclicker()
-            elseif Potion == "Heartsoothing Remedy" and AutoBrew then
+            elseif Potion == "Heartsoothing Remedy" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Cryastem") then
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
@@ -436,7 +436,7 @@ Brew:AddToggle({
                 getproximity()
                 task.wait(0.1)
                 getclicker()
-            elseif Potion == "Heartsoothing Remedy" and AutoBrew then
+            elseif Potion == "Heartsoothing Remedy" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Cryastem") then
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
@@ -455,7 +455,7 @@ Brew:AddToggle({
                 getproximity()
                 task.wait(0.1)
                 getclicker()
-            elseif Potion == "Abhorrent Elixir" and AutoBrew then
+            elseif Potion == "Abhorrent Elixir" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Cryastem") then
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
@@ -470,7 +470,7 @@ Brew:AddToggle({
                 getproximity()
                 task.wait(0.1)
                 getclicker()
-            elseif Potion == "Alluring Elixir" and AutoBrew then
+            elseif Potion == "Alluring Elixir" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Carnastool") then
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
@@ -485,6 +485,13 @@ Brew:AddToggle({
                 getproximity()
                 task.wait(0.1)
                 getclicker()
+            else
+                OrionLib:MakeNotification({
+                    Name = "Missing Required Ingredient For:",
+                    Content = tostring(Potion),
+                    Image = "rbxassetid://12614663538",
+                    Time = 5
+                })
             end
 
             if not AutoBrew then
