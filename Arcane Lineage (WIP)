@@ -1,5 +1,10 @@
 -- THIS SCRIPT WAS MADE FOR PERSONAL USE MEANING IT HAS VERY LITTLE OPTIMIZATION AND ONLY HAS FEATURES THAT I NEED FOR THIS GAME EX: Auto Brew only has the potions I have a use for and others most likely will not be added.
 
+repeat
+    wait()
+until game:IsLoaded()
+wait()
+
 -- Not my adonis bypasses - Everything else made by me (OneFool)
 for k, v in pairs(getgc(true)) do
     if pcall(function() return rawget(v, "indexInstance") end) and type(rawget(v, "indexInstance")) == "table" and (rawget(v, "indexInstance"))[1] == "kick" then
@@ -19,6 +24,22 @@ for i, v in next, getgc() do
     end
 end
 -- End Adonis Bypasses
+
+------------------------Anti_AFK----------------------------------
+if getconnections then
+    for _, v in next, getconnections(game:GetService("Players").LocalPlayer.Idled) do
+        v:Disable()
+    end
+end
+
+if not getconnections then
+    game:GetService("Players").LocalPlayer.Idled:connect(
+        function()
+            game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+        end
+    )
+end
+------------------------End_Anti_AFK------------------------------
 
 local NPCList = {}
 local QuestNPCList = {}
@@ -634,6 +655,10 @@ Rollback:AddButton({
         local p = game:GetService("Players").LocalPlayer
         ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, p)
     end
+})
+
+local AntiAFK = Misc:AddSection({
+    Name = "Anti-AFK Built In"
 })
 
 OrionLib:Init()
