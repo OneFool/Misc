@@ -150,7 +150,7 @@ PlayerSec:AddToggle({
             local value = 2
 
             debug.setupvalue(closure, upvalueIndex, value)
-            task.wait()
+            task.wait(0.33)
         end
     end
 })
