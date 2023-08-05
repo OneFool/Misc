@@ -324,15 +324,16 @@ Combat:AddToggle({
                 for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
                     if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name].FightInProgress.Value and Enemies.Parent.Name ~= lp.Name then
                         table.insert(enemiesToAttack, Enemies.Parent.Name)
-                    end
-                end
 
-                for _, enemyName in ipairs(enemiesToAttack) do
-                    local enemy = game:GetService("Workspace").Living[enemyName]
-                    if enemy then
-                        performAttack(enemy)
+                        for _, enemyName in ipairs(enemiesToAttack) do
+                            local enemy = game:GetService("Workspace").Living[enemyName]
+                            if enemy then
+                                performAttack(enemy)
+                            end
+                            task.wait(1)
+                        end
+                    else
                     end
-                    task.wait(1)
                 end
             end
         end
