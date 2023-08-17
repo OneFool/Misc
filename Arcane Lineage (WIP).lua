@@ -677,7 +677,7 @@ local Rollback = Misc:AddSection({
 })
 
 Rollback:AddButton({
-    Name = "Rollback Data Method 2",
+    Name = "Enable Rollback",
     Callback = function()
         while task.wait() do
             local ohTable1 = {
