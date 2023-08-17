@@ -576,7 +576,7 @@ Merchant:AddButton({
                 Name = "No Merchant Detected!",
                 Content = "Cannot Teleport To Merchant, Not Spawned!",
                 Image = "rbxassetid://12614663538",
-                Time = 4
+                Time = 5
             })
         end
     end
@@ -674,16 +674,6 @@ local Misc = Window:MakeTab({
 
 local Rollback = Misc:AddSection({
     Name = "Enable then drop the item(s) to another account then rejoin/leave"
-})
-
-Rollback:AddButton({
-    Name = "Rollback Data",
-    Callback = function()
-        while task.wait() do
-            game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(workspace)
-            print("Rollback Setup")
-        end
-    end
 })
 
 Rollback:AddButton({
