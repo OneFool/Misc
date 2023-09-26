@@ -1,4 +1,6 @@
 -- THIS SCRIPT WAS MADE FOR PERSONAL USE MEANING IT HAS VERY LITTLE OPTIMIZATION.
+-- This script is outdated and some features may get you banned currently there's no working public exploits for me to test it but if you have one and want to use this I recommend not using the data rollback or at least testing it on an alt.
+-- ^ as of 9/26/23
 
 repeat
     wait()
