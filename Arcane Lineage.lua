@@ -1,6 +1,5 @@
 -- THIS SCRIPT WAS MADE FOR PERSONAL USE MEANING IT HAS VERY LITTLE OPTIMIZATION.
--- This script is outdated and some features may get you banned currently there's no working public exploits for me to test it but if you have one and want to use this I recommend not using the data rollback or at least testing it on an alt.
--- ^ as of 9/26/23
+-- Decided to update this script one final time the rollback seems to be patched so it was removed along with auto-sprint
 
 repeat
     wait()
@@ -8,12 +7,13 @@ until game:IsLoaded()
 wait()
 
 -- Not my adonis bypasses - Everything else made by me (OneFool)
-for k, v in pairs(getgc(true)) do
+for _, v in pairs(getgc(true)) do
     if pcall(function() return rawget(v, "indexInstance") end) and type(rawget(v, "indexInstance")) == "table" and (rawget(v, "indexInstance"))[1] == "kick" then
         v.tvk = { "kick", function() return game.Workspace:WaitForChild("") end }
     end
 end
-for i, v in next, getgc() do
+
+for _, v in next, getgc() do
     if typeof(v) == "function" and islclosure(v) and not isexecutorclosure(v) then
         local Constants = debug.getconstants(v)
         if table.find(Constants, "Detected") and table.find(Constants, "crash") then
@@ -47,7 +47,7 @@ local NPCList = {}
 local QuestNPCList = {}
 local Moves = {}
 local lp = game:GetService("Players").LocalPlayer
-local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3" }
+local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3" }
 local aux = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Upbolt/Hydroxide/revision/ohaux.lua"))()
 
 function checkforfight()
@@ -127,36 +127,6 @@ PlayerSec:AddToggle({
     end
 })
 
-PlayerSec:AddToggle({
-    Name = "Auto-Sprint",
-    Default = false,
-    Save = true,
-    Flag = "AutoSprint",
-    Callback = function(Value)
-        getgenv().AutoSprint = (Value)
-
-        while AutoSprint do
-            local scriptPath = workspace.Living[lp.Name].MovementHandler
-            local closureName = "Sprint"
-            local upvalueIndex = 8
-            local closureConstants = {
-                [1] = "Effects",
-                [2] = "Stunned",
-                [3] = "FindFirstChild",
-                [4] = "NoSprint",
-                [5] = "FightInProgress",
-                [6] = "HumanoidRootPart"
-            }
-
-            local closure = aux.searchClosure(scriptPath, closureName, upvalueIndex, closureConstants)
-            local value = 2
-
-            debug.setupvalue(closure, upvalueIndex, value)
-            task.wait(0.23)
-        end
-    end
-})
-
 PlayerSec:AddButton({
     Name = "Heal At Doctor",
     Callback = function()
@@ -164,7 +134,7 @@ PlayerSec:AddButton({
 
         lp.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Doctor.Head
             .CFrame
-        task.wait(0.4)
+        task.wait(0.6)
         fireproximityprompt(game:GetService("Workspace").NPCs.Doctor.Head.ProximityPrompt)
         lp.PlayerGui:WaitForChild("NPCDialogue")
         lp.PlayerGui.NPCDialogue.RemoteEvent:FireServer(lp.PlayerGui.NPCDialogue.BG.Options.Option)
@@ -258,8 +228,7 @@ Combat:AddToggle({
     Flag = "AutoQTE",
     Callback = function(Value)
         getgenv().AutoQTE = (Value)
-        local BaseClass = lp.PlayerGui:WaitForChild("StatMenu").Holder.BaseClassVal
-            .Text
+        local BaseClass = lp.PlayerGui.StatMenu.Holder.ContentFrame.Stats.Body.RightColumn.Content.BaseClass.Type.Text
 
         while AutoQTE do
             task.wait()
@@ -674,24 +643,7 @@ local Misc = Window:MakeTab({
     PremiumOnly = false
 })
 
-local Rollback = Misc:AddSection({
-    Name = "Enable then drop the item(s) to another account then rejoin/leave"
-})
-
-Rollback:AddButton({
-    Name = "Enable Rollback",
-    Callback = function()
-        while task.wait() do
-            local ohTable1 = {
-                ["1"] = "\255"
-            }
-            game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohTable1)
-            print("Rollback Setup")
-        end
-    end
-})
-
-Rollback:AddButton({
+Misc:AddButton({
     Name = "Rejoin",
     Callback = function()
         local ts = game:GetService("TeleportService")
