@@ -1,5 +1,4 @@
 -- THIS SCRIPT WAS MADE FOR PERSONAL USE MEANING IT HAS VERY LITTLE OPTIMIZATION.
--- Decided to update this script one final time the rollback seems to be patched so it was removed along with auto-sprint
 
 repeat
     wait()
@@ -641,6 +640,23 @@ local Misc = Window:MakeTab({
     Name = "Misc",
     Icon = "rbxassetid://12614663538",
     PremiumOnly = false
+})
+
+local Rollback = Misc:AddSection({
+    Name = "Enable then drop the item(s) to another account then rejoin/leave"
+})
+
+Rollback:AddButton({
+    Name = "Enable Rollback",
+    Callback = function()
+        while task.wait() do
+            local ohTable1 = {
+                ["1"] = "\255"
+            }
+            game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohTable1)
+            print("Rollback Setup")
+        end
+    end
 })
 
 Misc:AddButton({
