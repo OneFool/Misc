@@ -47,7 +47,6 @@ local QuestNPCList = {}
 local Moves = {}
 local lp = game:GetService("Players").LocalPlayer
 local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3" }
-local aux = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Upbolt/Hydroxide/revision/ohaux.lua"))()
 
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
@@ -643,23 +642,6 @@ local Misc = Window:MakeTab({
     Name = "Misc",
     Icon = "rbxassetid://12614663538",
     PremiumOnly = false
-})
-
-local Rollback = Misc:AddSection({
-    Name = "Enable then drop the item(s) to another account then rejoin/leave"
-})
-
-Rollback:AddButton({
-    Name = "Enable Rollback",
-    Callback = function()
-        while task.wait() do
-            local ohTable1 = {
-                ["1"] = "\255"
-            }
-            game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohTable1)
-            print("Rollback Setup")
-        end
-    end
 })
 
 Misc:AddButton({
