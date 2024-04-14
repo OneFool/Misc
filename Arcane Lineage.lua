@@ -519,6 +519,7 @@ Merchant:AddToggle({
     Flag = "MerchantNoti",
     Callback = function(Value)
         getgenv().MerchNoti = (Value)
+        getgenv().merchnotifier = false
 
         while MerchNoti do
             task.wait()
@@ -529,7 +530,9 @@ Merchant:AddToggle({
                     Image = "rbxassetid://12614663538",
                     Time = 5
                 })
-                task.wait(5)
+                merchnotifier = true
+                task.wait(60)
+                merchnotifier = false
             end
         end
     end
