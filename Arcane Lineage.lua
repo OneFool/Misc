@@ -151,9 +151,9 @@ PlayerSec:AddToggle({
 
 PlayerSec:AddSlider({
     Name = "Walkspeed",
-    Min = tonumber(lp.Character.Humanoid.WalkSpeed),
+    Min = 16,
     Max = 250,
-    Default = tonumber(lp.Character.Humanoid.WalkSpeed),
+    Default = 16,
     Color = Color3.fromRGB(255, 0, 0),
     Increment = 1,
     ValueName = "Walkspeed",
@@ -403,18 +403,22 @@ Brew:AddToggle({
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Carnastool"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 task.wait(0.1)
                 getclicker()
@@ -422,18 +426,22 @@ Brew:AddToggle({
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Cryastem"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 task.wait(0.1)
                 getclicker()
@@ -441,18 +449,22 @@ Brew:AddToggle({
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Cryastem"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 task.wait(0.1)
                 getclicker()
@@ -460,14 +472,17 @@ Brew:AddToggle({
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Cryastem"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 task.wait(0.1)
                 getclicker()
@@ -475,14 +490,17 @@ Brew:AddToggle({
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Everthistle"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Carnastool"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
                 getproximity()
                 task.wait(0.1)
                 getclicker()
