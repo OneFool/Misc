@@ -1,4 +1,4 @@
--- This will automatically update with every new Vehicle that is added assuming there isn't a change to the names of GUI's.
+-- This will automatically update with every new plane that is added assuming there isn't a change to the names of GUI's.
 -- Made by @onefool
 -- Was bored and they released a new game so why not
 
