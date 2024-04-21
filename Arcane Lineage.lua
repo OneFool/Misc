@@ -364,7 +364,7 @@ local Brew = Automation:AddSection({
 Brew:AddDropdown({
     Name = "Potion To Auto Brew",
     Default = "",
-    Options = { "Heartbreaking Elixir", "Heartsoothing Remedy", "Abhorrent Elixir", "Alluring Elixir" },
+    Options = { "Small Healing Potion", "Medium Healing Potion", "Minor Energy Elixir", "Average Energy Elixer", "Minor Empowering Elixir", "Minor Absorbing Potion", "Ferrus Skin Potion", "Invisibility Potion", "Light of Grace", "Heartbreaking Elixir", "Heartsoothing Remedy", "Abhorrent Elixir", "Alluring Elixir" },
     Callback = function(Value)
         Potion = Value
     end
@@ -499,6 +499,168 @@ Brew:AddToggle({
                 getproximity()
                 local ohString1 = "Equip"
                 local ohString2 = "Carnastool"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Small Healing Potion" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Slime Chunk") then
+                local ohString1 = "Equip"
+                local ohString2 = "Everthistle"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Slime Chunk"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Medium Healing Potion" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Slime Chunk") and lp.Backpack.Tools:FindFirstChild("Carnastool") and lp.Backpack.Tools:FindFirstChild("Hightail") then
+                local ohString1 = "Equip"
+                local ohString2 = "Everthistle"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Slime Chunk"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Carnastool"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Hightail"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Minor Energy Elixir" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Carnastool") then
+                local ohString1 = "Equip"
+                local ohString2 = "Everthistle"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Carnastool"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Average Energy Elixir" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Everthistle") and lp.Backpack.Tools:FindFirstChild("Cryastem") and lp.Backpack.Tools:FindFirstChild("Restless Fragment") then
+                local ohString1 = "Equip"
+                local ohString2 = "Everthistle"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Cryastem"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Restless Fragment"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Minor Empowering Elixir" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Cryastem") and lp.Backpack.Tools:FindFirstChild("Carnastool") and lp.Backpack.Tools:FindFirstChild("Sand Core") then
+                local ohString1 = "Equip"
+                local ohString2 = "Carnastool"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Cryastem"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Sand Core"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Minor Absorbing Potion" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Hightail") and lp.Backpack.Tools:FindFirstChild("Mushroom Cap") then
+                local ohString1 = "Equip"
+                local ohString2 = "Hightail"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Mushroom Cap"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Ferrus Skin Potion" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Carnastool") and lp.Backpack.Tools:FindFirstChild("Mushroom Cap") and lp.Backpack.Tools:FindFirstChild("Sand Core") then
+                local ohString1 = "Equip"
+                local ohString2 = "Carnastool"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Mushroom Cap"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Sand Core"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Invisibility Potion" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Driproot") and lp.Backpack.Tools:FindFirstChild("Hightail") and lp.Backpack.Tools:FindFirstChild("Haze Chunk") then
+                local ohString1 = "Equip"
+                local ohString2 = "Driproot"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Hightail"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Haze Chunk"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                task.wait(0.1)
+                getclicker()
+            elseif Potion == "Light of Grace" and AutoBrew and lp.Backpack.Tools:FindFirstChild("Phoenix Tear") and lp.Backpack.Tools:FindFirstChild("Crylight") and lp.Backpack.Tools:FindFirstChild("Haze Chunk") and lp.Backpack.Tools:FindFirstChild("Sand Core") and lp.Backpack.Tools:FindFirstChild("Driproot") then
+                local ohString1 = "Equip"
+                local ohString2 = "Phoenix Tear"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Crylight"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Haze Chunk"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Sand Core"
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
+                task.wait(0.23)
+                getproximity()
+                local ohString1 = "Equip"
+                local ohString2 = "Driproot"
                 game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, ohString2)
                 task.wait(0.23)
                 getproximity()
