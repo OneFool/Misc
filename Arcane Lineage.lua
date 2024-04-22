@@ -282,8 +282,29 @@ Combat:AddToggle({
                 ["Attacking"] = target
             }
 
-            lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(
-                ohString1, ohString2, ohTable3)
+            local energyText = lp.PlayerGui.HUD.Holder.EnergyOutline.Count.Text
+            local slashPos = string.find(energyText, "/")
+            local energy = tonumber(string.sub(energyText, 1, slashPos - 1))
+
+            if energy >= tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].Cost.Text) and tonumber(lp.PlayerGui.Combat.ActionBG.AttacksPage.ScrollingFrame[MoveToUse].CD.Count.Text) == tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].CD.Count.Text) then
+                lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
+                -- Games CD's work weird so I can't properly check if it's off cd so I just make it use strike after a while to avoid it just sitting afk. (Maybe I'm just dumb)
+                task.wait(2)
+                local ohString11 = "Attack"
+                local ohString22 = "Strike"
+                local ohTable33 = {
+                    ["Attacking"] = target
+                }
+                lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString11, ohString22, ohTable33)
+            else
+                local ohString1 = "Attack"
+                local ohString2 = "Strike"
+                local ohTable3 = {
+                    ["Attacking"] = target
+                }
+                lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
+                task.wait(2)
+            end
         end
 
         while AutoAttack do
@@ -299,7 +320,7 @@ Combat:AddToggle({
                             if enemy then
                                 performAttack(enemy)
                             end
-                            task.wait(1)
+                            task.wait(1.5)
                         end
                     else
                     end
