@@ -47,12 +47,13 @@ local QuestNPCList = {}
 local Moves = {}
 local lp = game:GetService("Players").LocalPlayer
 local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3" }
+Boolerean = nil
 
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
-        return true
+        Boolerean = true
     else
-        return false
+        Boolerean = false
     end
 end
 
@@ -275,58 +276,61 @@ Combat:AddToggle({
     Callback = function(Value)
         getgenv().AutoAttack = (Value)
 
-        local function performAttack(target)
-            local ohString1 = "Attack"
-            local ohString2 = tostring(MoveToUse)
-            local ohTable3 = {
-                ["Attacking"] = target
-            }
-
-            local energyText = lp.PlayerGui.HUD.Holder.EnergyOutline.Count.Text
-            local slashPos = string.find(energyText, "/")
-            local energy = tonumber(string.sub(energyText, 1, slashPos - 1))
-
-            if energy >= tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].Cost.Text) and tonumber(lp.PlayerGui.Combat.ActionBG.AttacksPage.ScrollingFrame[MoveToUse].CD.Count.Text) == tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].CD.Count.Text) then
-                lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
-                -- Games CD's work weird so I can't properly check if it's off cd so I just make it use strike after a while to avoid it just sitting afk. (Maybe I'm just dumb)
-                task.wait(2)
-                local ohString11 = "Attack"
-                local ohString22 = "Strike"
-                local ohTable33 = {
-                    ["Attacking"] = target
-                }
-                lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString11, ohString22, ohTable33)
-            else
+        pcall(function()
+            local function performAttack(target)
                 local ohString1 = "Attack"
-                local ohString2 = "Strike"
+                local ohString2 = tostring(MoveToUse)
                 local ohTable3 = {
                     ["Attacking"] = target
                 }
-                lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
-                task.wait(2)
+
+                local energyText = lp.PlayerGui.HUD.Holder.EnergyOutline.Count.Text
+                local slashPos = string.find(energyText, "/")
+                local energy = tonumber(string.sub(energyText, 1, slashPos - 1))
+
+                if energy >= tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].Cost.Text) and tonumber(lp.PlayerGui.Combat.ActionBG.AttacksPage.ScrollingFrame[MoveToUse].CD.Count.Text) == tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].CD.Count.Text) then
+                    lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
+                    -- Games CD's work weird so I can't properly check if it's off cd so I just make it use strike after a while to avoid it just sitting afk. (Maybe I'm just dumb)
+                    task.wait(2)
+                    local ohString11 = "Attack"
+                    local ohString22 = "Strike"
+                    local ohTable33 = {
+                        ["Attacking"] = target
+                    }
+                    lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString11, ohString22, ohTable33)
+                else
+                    local ohString1 = "Attack"
+                    local ohString2 = "Strike"
+                    local ohTable3 = {
+                        ["Attacking"] = target
+                    }
+                    lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
+                    task.wait(2)
+                end
             end
-        end
 
-        while AutoAttack do
-            task.wait()
-            if checkforfight() then
-                local enemiesToAttack = {}
-                for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
-                    if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name].FightInProgress.Value and Enemies.Parent.Name ~= lp.Name then
-                        table.insert(enemiesToAttack, Enemies.Parent.Name)
+            while AutoAttack do
+                task.wait(1)
+                checkforfight()
+                task.wait(1.1)
+                if Boolerean == true then
+                    local enemiesToAttack = {}
+                    for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
+                        if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name].FightInProgress.Value and Enemies.Parent.Name ~= lp.Name then
+                            table.insert(enemiesToAttack, Enemies.Parent.Name)
 
-                        for _, enemyName in ipairs(enemiesToAttack) do
-                            local enemy = game:GetService("Workspace").Living[enemyName]
-                            if enemy then
-                                performAttack(enemy)
+                            for _, enemyName in ipairs(enemiesToAttack) do
+                                local enemy = game:GetService("Workspace").Living[enemyName]
+                                if enemy then
+                                    performAttack(enemy)
+                                end
+                                task.wait(1)
                             end
-                            task.wait(1.5)
                         end
-                    else
                     end
                 end
             end
-        end
+        end)
     end
 })
 
