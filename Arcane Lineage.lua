@@ -48,6 +48,12 @@ local Moves = {}
 local lp = game:GetService("Players").LocalPlayer
 local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3" }
 Boolerean = nil
+local orgwalk = lp.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed
+local orgjump = lp.Character:FindFirstChildWhichIsA("Humanoid").JumpPower
+local Walkspeeder = false
+local JumpPowerr = false
+local CurrentWalkspeed = 16
+local CurrentJumpPower = 50
 
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
@@ -146,7 +152,12 @@ PlayerSec:AddToggle({
     Name = "Enable Walkspeed",
     Default = false,
     Callback = function(Value)
-        Walkspeeder = (Value)
+        Walkspeeder = Value
+        if Value then
+            lp.Character.Humanoid.WalkSpeed = CurrentWalkspeed
+        elseif not Value then
+            lp.Character.Humanoid.WalkSpeed = orgwalk
+        end
     end
 })
 
@@ -159,9 +170,9 @@ PlayerSec:AddSlider({
     Increment = 1,
     ValueName = "Walkspeed",
     Callback = function(Value)
-        while Walkspeeder == true do
-            lp.Character.Humanoid.WalkSpeed = (Value)
-            task.wait()
+        CurrentWalkspeed = Value
+        if Walkspeeder then
+            lp.Character.Humanoid.WalkSpeed = Value
         end
     end
 })
@@ -170,7 +181,12 @@ PlayerSec:AddToggle({
     Name = "Enable JumpPower",
     Default = false,
     Callback = function(Value)
-        JumpPowerr = (Value)
+        JumpPowerr = Value
+        if Value then
+            lp.Character.Humanoid.JumpPower = CurrentJumpPower
+        elseif not Value then
+            lp.Character.Humanoid.JumpPower = orgjump
+        end
     end
 })
 
@@ -183,9 +199,9 @@ PlayerSec:AddSlider({
     Increment = 1,
     ValueName = "JumpPower",
     Callback = function(Value)
-        while JumpPowerr == true do
-            lp.Character.Humanoid.JumpPower = (Value)
-            task.wait()
+        CurrentJumpPower = Value
+        if JumpPowerr then
+            lp.Character.Humanoid.JumpPower = Value
         end
     end
 })
@@ -271,7 +287,7 @@ Combat:AddToggle({
 })
 
 Combat:AddToggle({
-    Name = "Auto-Attack",
+    Name = "Auto-Attack (Working On Fix)",
     Default = false,
     Callback = function(Value)
         getgenv().AutoAttack = (Value)
@@ -288,7 +304,7 @@ Combat:AddToggle({
                 local slashPos = string.find(energyText, "/")
                 local energy = tonumber(string.sub(energyText, 1, slashPos - 1))
 
-                if energy >= tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].Cost.Text) and tonumber(lp.PlayerGui.Combat.ActionBG.AttacksPage.ScrollingFrame[MoveToUse].CD.Count.Text) == tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].CD.Count.Text) then
+                if energy >= tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].Cost.Text) then
                     lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
                     -- Games CD's work weird so I can't properly check if it's off cd so I just make it use strike after a while to avoid it just sitting afk. (Maybe I'm just dumb)
                     task.wait(2)
