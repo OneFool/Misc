@@ -220,18 +220,58 @@ Combat:AddToggle({
     Save = true,
     Flag = "AutoDodge",
     Callback = function(Value)
-        getgenv().AutoDodge = (Value)
+        if not AutoBlock then
+            getgenv().AutoDodge = (Value)
 
-        while AutoDodge do
-            task.wait()
-            local ohTable1 = {
-                [1] = true,
-                [2] = true
-            }
-            local ohString2 = "DodgeMinigame"
+            while AutoDodge do
+                task.wait()
+                local ohTable1 = {
+                    [1] = true,
+                    [2] = true
+                }
+                local ohString2 = "DodgeMinigame"
 
-            game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohTable1, ohString2)
-            task.wait()
+                game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohTable1, ohString2)
+                task.wait()
+            end
+        else
+            OrionLib:MakeNotification({
+                Name = "Warning:",
+                Content = "Disable Auto-Block and Re-Enable this to use it",
+                Image = "rbxassetid://12614663538",
+                Time = 5
+            })
+        end
+    end
+})
+
+Combat:AddToggle({
+    Name = "Auto-Block",
+    Default = false,
+    Save = true,
+    Flag = "AutoBlock",
+    Callback = function(Value)
+        if not AutoDodge then
+            getgenv().AutoBlock = (Value)
+
+            while AutoBlock do
+                task.wait()
+                local ohTable1 = {
+                    [1] = true,
+                    [2] = false
+                }
+                local ohString2 = "DodgeMinigame"
+
+                game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohTable1, ohString2)
+                task.wait()
+            end
+        else
+            OrionLib:MakeNotification({
+                Name = "Warning:",
+                Content = "Disable Auto-Dodge and Re-Enable this to use it",
+                Image = "rbxassetid://12614663538",
+                Time = 5
+            })
         end
     end
 })
@@ -856,6 +896,13 @@ Teleports:AddDropdown({
                 TweenInfo.new(Time), { CFrame = CFrameEnd })
             tween:Play()
         end
+    end
+})
+
+Teleports:AddButton({
+    Name = "Meditate",
+    Callback = function()
+        workspace.Living[lp.Name].MeditateHandler.Meditate:FireServer()
     end
 })
 
