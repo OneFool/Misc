@@ -927,4 +927,7 @@ local AntiAFK = Misc:AddSection({
     Name = "Anti-AFK Built In"
 })
 
+Misc:AddLabel("My ONLY 2 Discords: fo.l | onefool")
+Misc:AddLabel("I recommend only using this script in a private server!")
+
 OrionLib:Init()
