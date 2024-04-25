@@ -902,6 +902,8 @@ Teleports:AddDropdown({
 Teleports:AddButton({
     Name = "Meditate",
     Callback = function()
+        lp.Character.HumanoidRootPart.CFrame = workspace.Mats.MeditationMat.Root.CFrame
+        task.wait(0.5)
         workspace.Living[lp.Name].MeditateHandler.Meditate:FireServer()
     end
 })
