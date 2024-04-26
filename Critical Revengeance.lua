@@ -124,3 +124,5 @@ PlayerSec:AddToggle({
         end
     end
 })
+
+OrionLib:Init()
