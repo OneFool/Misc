@@ -938,7 +938,6 @@ Misc:AddToggle({
                 }
 
                 game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
-                print("Set")
                 task.wait()
             end
         else
@@ -948,7 +947,6 @@ Misc:AddToggle({
             }
 
             game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
-            print("Canceled")
         end
     end
 })
