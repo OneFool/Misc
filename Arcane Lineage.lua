@@ -327,7 +327,7 @@ Combat:AddToggle({
 })
 
 Combat:AddToggle({
-    Name = "Auto-Attack (Working On Fix)",
+    Name = "Auto-Attack",
     Default = false,
     Callback = function(Value)
         getgenv().AutoAttack = (Value)
@@ -346,7 +346,7 @@ Combat:AddToggle({
 
                 if energy >= tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].Cost.Text) then
                     lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
-                    -- Games CD's work weird so I can't properly check if it's off cd so I just make it use strike after a while to avoid it just sitting afk. (Maybe I'm just dumb)
+
                     task.wait(2)
                     local ohString11 = "Attack"
                     local ohString22 = "Strike"
@@ -372,7 +372,7 @@ Combat:AddToggle({
                 if Boolerean == true then
                     local enemiesToAttack = {}
                     for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
-                        if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name].FightInProgress.Value and Enemies.Parent.Name ~= lp.Name then
+                        if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress").Value and Enemies.Parent.Name ~= lp.Name then
                             table.insert(enemiesToAttack, Enemies.Parent.Name)
 
                             for _, enemyName in ipairs(enemiesToAttack) do
@@ -929,5 +929,12 @@ local AntiAFK = Misc:AddSection({
 
 Misc:AddLabel("My ONLY 2 Discords: fo.l | onefool")
 Misc:AddLabel("I recommend only using this script in a private server!")
+OrionLib:MakeNotification({
+    Name = "Warning:",
+    Content =
+    "If the auto attack doesn't work in the first fight after you enable it simply re-enable it and it should work from then on!",
+    Image = "rbxassetid://12614663538",
+    Time = 10
+})
 
 OrionLib:Init()
