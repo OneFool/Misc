@@ -26,6 +26,15 @@ for _, v in next, getgc() do
 end
 -- End Adonis Bypasses
 
+-- Client AntiKick
+OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
+    if not checkcaller() and string.lower(getnamecallmethod()) == "kick" then
+        return nil
+    end
+
+    return OldNamecall(...)
+end))
+
 ------------------------Anti_AFK----------------------------------
 if getconnections then
     for _, v in next, getconnections(game:GetService("Players").LocalPlayer.Idled) do
@@ -912,6 +921,36 @@ local Misc = Window:MakeTab({
     Name = "Misc",
     Icon = "rbxassetid://12614663538",
     PremiumOnly = false
+})
+
+Misc:AddToggle({
+    Name = "Enable Data Rollback",
+    Default = false,
+    Save = false,
+    Callback = function(Value)
+        getgenv().Rollback = Value
+
+        if Rollback then
+            while Rollback do
+                local ohNumber1 = 1
+                local ohTable2 = {
+                    ["1"] = "\237\190\140"
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
+                print("Set")
+                task.wait()
+            end
+        else
+            local ohNumber1 = 1
+            local ohTable2 = {
+                ["1"] = ""
+            }
+
+            game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
+            print("Canceled")
+        end
+    end
 })
 
 Misc:AddButton({
