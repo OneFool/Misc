@@ -56,7 +56,7 @@ local QuestNPCList = {}
 local Moves = {}
 local Items = {}
 local AntiDupeItems = { "Carnastool", "Everthistle", "Hightail", "Driproot", "Slime Chunk", "Mushroom Cap", "Crylight",
-    "Cryastem", "Sneak", "Bestiary" }
+    "Cryastem", "Sneak", "Bestiary", "Pickaxe" }
 local lp = game:GetService("Players").LocalPlayer
 local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3" }
 Boolerean = nil
