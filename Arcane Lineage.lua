@@ -996,8 +996,7 @@ Misc:AddButton({
     Name = "Rejoin",
     Callback = function()
         local ts = game:GetService("TeleportService")
-        local p = lp
-        ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, p)
+        ts:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
     end
 })
 
@@ -1005,8 +1004,24 @@ local AntiAFK = Misc:AddSection({
     Name = "Anti-AFK Built In"
 })
 
-Misc:AddLabel("My ONLY 2 Discords: fo.l | onefool")
-Misc:AddLabel("I recommend only using this script in a private server!")
+local Info = Window:MakeTab({
+    Name = "Info",
+    Icon = "rbxassetid://12614663538",
+    PremiumOnly = false
+})
+
+Info:AddLabel("My ONLY 2 Discords: fo.l | onefool")
+Info:AddLabel("I recommend only using this script in a private server!")
+Info:AddParagraph("Only Real Loadstring",
+    "loadstring(game:HttpGet('https://raw.githubusercontent.com/OneFool/Misc/main/Arcane%20Lineage.lua'))()")
+Info:AddButton({
+    Name = "Copy Real Loadstring",
+    Callback = function()
+        setclipboard(
+        "loadstring(game:HttpGet('https://raw.githubusercontent.com/OneFool/Misc/main/Arcane%20Lineage.lua'))()")
+    end
+})
+
 OrionLib:MakeNotification({
     Name = "Warning:",
     Content =
