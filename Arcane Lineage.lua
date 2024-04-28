@@ -242,7 +242,7 @@ Combat:AddToggle({
         if not AutoBlock then
             getgenv().AutoDodge = (Value)
 
-            while AutoDodge do
+            while AutoDodge and game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress") do
                 task.wait()
                 local ohTable1 = {
                     [1] = true,
@@ -273,7 +273,7 @@ Combat:AddToggle({
         if not AutoDodge then
             getgenv().AutoBlock = (Value)
 
-            while AutoBlock do
+            while AutoBlock and game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress") do
                 task.wait()
                 local ohTable1 = {
                     [1] = true,
@@ -304,7 +304,7 @@ Combat:AddToggle({
         getgenv().AutoQTE = (Value)
         local BaseClass = lp.PlayerGui.StatMenu.Holder.ContentFrame.Stats.Body.RightColumn.Content.BaseClass.Type.Text
 
-        while AutoQTE do
+        while AutoQTE and game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress") do
             task.wait()
 
             -- Wizard
@@ -1011,6 +1011,7 @@ local Info = Window:MakeTab({
 })
 
 Info:AddLabel("My ONLY 2 Discords: fo.l | onefool")
+Info:AddLabel("REPORT ERRORS TO MY DISCORD @fo.l")
 Info:AddLabel("I recommend only using this script in a private server!")
 Info:AddParagraph("Only Real Loadstring",
     "loadstring(game:HttpGet('https://raw.githubusercontent.com/OneFool/Misc/main/Arcane%20Lineage.lua'))()")
@@ -1018,7 +1019,7 @@ Info:AddButton({
     Name = "Copy Real Loadstring",
     Callback = function()
         setclipboard(
-        "loadstring(game:HttpGet('https://raw.githubusercontent.com/OneFool/Misc/main/Arcane%20Lineage.lua'))()")
+            "loadstring(game:HttpGet('https://raw.githubusercontent.com/OneFool/Misc/main/Arcane%20Lineage.lua'))()")
     end
 })
 
