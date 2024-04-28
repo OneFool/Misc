@@ -54,6 +54,9 @@ end
 local NPCList = {}
 local QuestNPCList = {}
 local Moves = {}
+local Items = {}
+local AntiDupeItems = { "Carnastool", "Everthistle", "Hightail", "Driproot", "Slime Chunk", "Mushroom Cap", "Crylight",
+    "Cryastem", "Sneak", "Bestiary" }
 local lp = game:GetService("Players").LocalPlayer
 local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3" }
 Boolerean = nil
@@ -91,6 +94,13 @@ end
 for _, Movess in next, lp.PlayerGui.StatMenu.SkillMenu.Actives:GetChildren() do
     if Movess:IsA("TextButton") then
         table.insert(Moves, Movess.Name)
+    end
+end
+
+for _, Itemss in next, lp.Backpack.Tools:GetChildren() do
+    if Itemss:IsA("StringValue") and not table.find(AntiDupeItems, Itemss.Name) then
+        local itemName = Itemss.Name
+        table.insert(Items, itemName)
     end
 end
 
@@ -949,6 +959,36 @@ Misc:AddToggle({
 
             game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
         end
+    end
+})
+
+Misc:AddToggle({
+    Name = "Auto-Drop Item",
+    Default = false,
+    Save = false,
+    Callback = function(Value)
+        getgenv().AutoDrop = Value
+
+        if AutoDrop then
+            while AutoDrop do
+                local ohString1 = "Drop"
+                local ohInstance3 = lp.Backpack.Tools:WaitForChild(Item)
+
+                game:GetService("ReplicatedStorage").Remotes.Information.InventoryManage:FireServer(ohString1, Item,
+                    ohInstance3)
+                task.wait()
+            end
+        else
+        end
+    end
+})
+
+local id = Misc:AddDropdown({
+    Name = "Item To Drop",
+    Default = "",
+    Options = Items,
+    Callback = function(Value)
+        Item = Value
     end
 })
 
