@@ -832,7 +832,7 @@ Merchant:AddToggle({
                     Name = "Merchant Detected!",
                     Content = "The Mysterious Merchant Is Spawned!",
                     Image = "rbxassetid://12614663538",
-                    Time = 5
+                    Time = 10
                 })
                 merchnotifier = true
                 task.wait(60)
@@ -899,7 +899,7 @@ Teleports:AddDropdown({
     Name = "Specific Places",
     Default = "",
     Options = { "Caldera Spawn", "Ruins Spawn (Sand Town)", "Westwood Spawn", "Blades Spawn", "Yar'thul Gate",
-        "Thorian Gate" },
+        "Thorian Gate", "The Forgotten Sanctum", "Thanasius", "Westwood Apothecarian", "Deeproot Depths" },
     Callback = function(Value)
         if Value == "Caldera Spawn" then
             local CFrameEnd = CFrame.new(-221.396332, 46.5463257, -3328.51367, -1, 0, 0, 0, 1, 0, 0, 0, -1)
@@ -939,6 +939,34 @@ Teleports:AddDropdown({
             local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
                 TweenInfo.new(Time), { CFrame = CFrameEnd })
             tween:Play()
+        elseif Value == "The Forgotten Sanctum" then
+            local CFrameEnd = CFrame.new(5987.44678, 53.3530579, -3465.15186, 0.995714128, 3.02554888e-08, -0.0924842209,
+                -3.60760062e-08, 1, -6.12634139e-08, 0.0924842209, 6.43373141e-08, 0.995714128)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Westwood Apothecarian" then
+            local CFrameEnd = CFrame.new(2606.7832, 386.319122, -4042.98633, 0.999831498, -6.83423522e-08, 0.0183564071,
+                6.99661413e-08, 1, -8.78168009e-08, -0.0183564071, 8.90863348e-08, 0.999831498)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Thanasius" then
+            local CFrameEnd = CFrame.new(1675.40479, 5.31999874, -1663.76953, -0.404080033, 1.18365541e-07, 0.914723635,
+                3.73702065e-08, 1, -1.1289201e-07, -0.914723635, -1.1433996e-08, -0.404080033)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Deeproot Depths" then
+            local CFrameEnd = CFrame.new(5366.65625, 83.0383987, -2891.76953, 1, 5.01325315e-10, -5.26991848e-14,
+                -5.01325315e-10, 1, -1.37222793e-08, 5.26923069e-14, 1.37222793e-08, 1)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
         end
     end
 })
@@ -964,9 +992,17 @@ Misc:AddToggle({
     Default = false,
     Save = false,
     Callback = function(Value)
+        local rollbackChk = getgenv().Rollback or false
         getgenv().Rollback = Value
 
         if Rollback then
+            OrionLib:MakeNotification({
+                Name = "Rollback Enabled!",
+                Content =
+                "The data rollback is ready to use!",
+                Image = "rbxassetid://12614663538",
+                Time = 10
+            })
             while Rollback do
                 local ohNumber1 = 1
                 local ohTable2 = {
@@ -975,14 +1011,25 @@ Misc:AddToggle({
 
                 game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
                 task.wait()
+                print("set")
             end
         else
-            local ohNumber1 = 1
-            local ohTable2 = {
-                ["1"] = ""
-            }
+            if rollbackChk then
+                local ohNumber1 = 1
+                local ohTable2 = {
+                    ["1"] = ""
+                }
 
-            game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
+                game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
+                OrionLib:MakeNotification({
+                    Name = "Rollback Disabled",
+                    Content =
+                    "Rollback has been canceled!",
+                    Image = "rbxassetid://12614663538",
+                    Time = 10
+                })
+                print("canceled")
+            end
         end
     end
 })
