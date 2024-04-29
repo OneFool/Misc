@@ -1011,7 +1011,6 @@ Misc:AddToggle({
 
                 game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
                 task.wait()
-                print("set")
             end
         else
             if rollbackChk then
@@ -1028,7 +1027,6 @@ Misc:AddToggle({
                     Image = "rbxassetid://12614663538",
                     Time = 10
                 })
-                print("canceled")
             end
         end
     end
