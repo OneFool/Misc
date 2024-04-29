@@ -151,6 +151,27 @@ PlayerSec:AddToggle({
     end
 })
 
+PlayerSec:AddToggle({
+    Name = "Mastery Point Notifier",
+    Default = false,
+    Save = true,
+    Flag = "MasteryNotifier",
+    Callback = function(Value)
+        getgenv().MasteryNoti = Value
+
+        lp.PlayerGui.ClassMastery.Main.Points:GetPropertyChangedSignal("Text"):Connect(function()
+            if MasteryNoti then
+                OrionLib:MakeNotification({
+                    Name = "Mastery Point(s) Gained!",
+                    Content = "If you just put a point into your mastery tree ignore this!",
+                    Image = "rbxassetid://12614663538",
+                    Time = 10
+                })
+            end
+        end)
+    end
+})
+
 PlayerSec:AddButton({
     Name = "Heal At Doctor",
     Callback = function()
