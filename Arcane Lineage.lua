@@ -172,10 +172,14 @@ PlayerSec:AddToggle({
     Default = false,
     Callback = function(Value)
         Walkspeeder = Value
-        if Value then
-            lp.Character.Humanoid.WalkSpeed = CurrentWalkspeed
-        elseif not Value then
-            lp.Character.Humanoid.WalkSpeed = orgwalk
+        while Walkspeeder do
+            task.wait()
+            if Walkspeeder then
+                lp.Character.Humanoid.WalkSpeed = CurrentWalkspeed
+            elseif not Walkspeeder then
+                lp.Character.Humanoid.WalkSpeed = orgwalk
+                task.wait()
+            end
         end
     end
 })
