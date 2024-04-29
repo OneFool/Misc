@@ -1022,7 +1022,7 @@ Misc:AddToggle({
 
                 game:GetService("ReplicatedStorage").Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
                 OrionLib:MakeNotification({
-                    Name = "Rollback Disabled",
+                    Name = "Rollback Disabled!",
                     Content =
                     "Rollback has been canceled!",
                     Image = "rbxassetid://12614663538",
