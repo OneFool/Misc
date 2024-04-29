@@ -391,7 +391,9 @@ Combat:AddToggle({
                 if energy >= tonumber(lp.PlayerGui.StatMenu.SkillMenu.Actives[MoveToUse].Cost.Text) then
                     lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
 
-                    task.wait(2)
+                    task.wait(1.5)
+                    lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
+                    task.wait(0.5)
                     local ohString11 = "Attack"
                     local ohString22 = "Strike"
                     local ohTable33 = {
@@ -405,26 +407,35 @@ Combat:AddToggle({
                         ["Attacking"] = target
                     }
                     lp.PlayerGui.Combat.CombatHandle.RemoteFunction:InvokeServer(ohString1, ohString2, ohTable3)
-                    task.wait(2)
+                    task.wait()
                 end
             end
 
-            while AutoAttack do
-                task.wait(1)
-                checkforfight()
-                task.wait(1.1)
-                if Boolerean == true then
-                    local enemiesToAttack = {}
-                    for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
-                        if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress").Value and Enemies.Parent.Name ~= lp.Name then
-                            table.insert(enemiesToAttack, Enemies.Parent.Name)
+            if AutoAttack then
+                OrionLib:MakeNotification({
+                    Name = "Warning:",
+                    Content =
+                    "If the auto attack doesn't work in the first fight after you enable it simply re-enable it and it should work from then on!",
+                    Image = "rbxassetid://12614663538",
+                    Time = 10
+                })
+                while AutoAttack do
+                    task.wait()
+                    checkforfight()
+                    task.wait(1.1)
+                    if Boolerean == true then
+                        local enemiesToAttack = {}
+                        for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
+                            if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress").Value and Enemies.Parent.Name ~= lp.Name then
+                                table.insert(enemiesToAttack, Enemies.Parent.Name)
 
-                            for _, enemyName in ipairs(enemiesToAttack) do
-                                local enemy = game:GetService("Workspace").Living[enemyName]
-                                if enemy then
-                                    performAttack(enemy)
+                                for _, enemyName in ipairs(enemiesToAttack) do
+                                    local enemy = game:GetService("Workspace").Living[enemyName]
+                                    if enemy then
+                                        performAttack(enemy)
+                                    end
+                                    task.wait()
                                 end
-                                task.wait(1)
                             end
                         end
                     end
@@ -1091,14 +1102,6 @@ Info:AddButton({
         setclipboard(
             "loadstring(game:HttpGet('https://raw.githubusercontent.com/OneFool/Misc/main/Arcane%20Lineage.lua'))()")
     end
-})
-
-OrionLib:MakeNotification({
-    Name = "Warning:",
-    Content =
-    "If the auto attack doesn't work in the first fight after you enable it simply re-enable it and it should work from then on!",
-    Image = "rbxassetid://12614663538",
-    Time = 10
 })
 
 OrionLib:Init()
