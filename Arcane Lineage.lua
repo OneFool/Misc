@@ -997,7 +997,6 @@ local Misc = Window:MakeTab({
     PremiumOnly = false
 })
 
-Misc:AddLabel("Do not use the data rollback on your main!")
 Misc:AddToggle({
     Name = "Enable Data Rollback",
     Default = false,
