@@ -55,8 +55,8 @@ local NPCList = {}
 local QuestNPCList = {}
 local Moves = {}
 local Items = {}
-local AntiDupeItems = { "Carnastool", "Everthistle", "Hightail", "Driproot", "Slime Chunk", "Mushroom Cap", "Crylight",
-    "Cryastem", "Sneak", "Bestiary", "Pickaxe" }
+local DuplicateItems = {}
+local AntiDupeItems = { "Sneak", "Bestiary", "Pickaxe" }
 local lp = game:GetService("Players").LocalPlayer
 local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3" }
 Boolerean = nil
@@ -66,6 +66,7 @@ local Walkspeeder = false
 local JumpPowerr = false
 local CurrentWalkspeed = 16
 local CurrentJumpPower = 50
+local runbuff = workspace.Living[lp.Name].Effects.RunBuff.Value
 
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
@@ -100,9 +101,13 @@ end
 for _, Itemss in next, lp.Backpack.Tools:GetChildren() do
     if Itemss:IsA("StringValue") and not table.find(AntiDupeItems, Itemss.Name) then
         local itemName = Itemss.Name
-        table.insert(Items, itemName)
+        if not DuplicateItems[itemName] then
+            table.insert(Items, itemName)
+            DuplicateItems[itemName] = true
+        end
     end
 end
+
 
 for _, NPC in next, game:GetService("Workspace").NPCs:GetChildren() do
     if NPC:IsA("Model") and not table.find(BlacklistedNPC, NPC.Name) then
@@ -217,6 +222,39 @@ PlayerSec:AddSlider({
         CurrentWalkspeed = Value
         if Walkspeeder then
             lp.Character.Humanoid.WalkSpeed = Value
+        end
+    end
+})
+
+PlayerSec:AddToggle({
+    Name = "Enable Run Speed Modifier",
+    Default = false,
+    Callback = function(Value)
+        RunBuffer = Value
+        while RunBuffer do
+            task.wait()
+            if RunBuffer then
+                workspace.Living[lp.Name].Effects.RunBuff.Value = CurrentRunBuff
+            elseif not RunBuffer then
+                workspace.Living[lp.Name].Effects.RunBuff.Value = runbuff
+                task.wait()
+            end
+        end
+    end
+})
+
+PlayerSec:AddSlider({
+    Name = "Run Speed Modifier",
+    Min = tonumber(runbuff),
+    Max = 100,
+    Default = tonumber(runbuff),
+    Color = Color3.fromRGB(255, 0, 0),
+    Increment = 1,
+    ValueName = "Run Speed",
+    Callback = function(Value)
+        CurrentRunBuff = Value
+        if RunBuffer then
+            workspace.Living[lp.Name].Effects.RunBuff = Value
         end
     end
 })
@@ -520,6 +558,7 @@ Brew:AddToggle({
             lp.Character.HumanoidRootPart.CFrame = CFrame.new(2659.95288, 389.135986, -3946.76294, 0.993850768,
                 4.01330915e-08, 0.110727936, -4.54039046e-08, 1, 4.50799895e-08, -0.110727936, -4.98302626e-08,
                 0.993850768)
+            task.wait(0.5)
             for _, CauldronPos in next, game:GetService("Workspace").Cauldrons:GetDescendants() do
                 if CauldronPos:IsA("BasePart") and CauldronPos.CFrame == CFrame.new(2660.21313, 385.237915, -3945.37964, -0.990265131, 0.139194876, 6.78002834e-07, -6.78002834e-07, -9.77516174e-06, 1.00000012, 0.139194876, 0.990265071, 9.7155571e-06) then
                     CauldronPos.Name = "AutoCaul"
