@@ -82,6 +82,8 @@ local JumpPowerr = false
 local CurrentWalkspeed = 16
 local CurrentJumpPower = 50
 local runbuff = workspace.Living[lp.Name].Effects.RunBuff.Value
+local maxTime = 1.5
+local debounce = 0.2
 
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
@@ -120,7 +122,12 @@ local function brewPotion(recipe)
         local itemName, quantity = unpack(ingredient)
         for i = 1, quantity do
             equipItem(itemName)
-            task.wait(0.5)
+            repeat
+                task.wait()
+            until lp.Character:FindFirstChild(itemName) or tick() - maxTime >= debounce
+            if not lp.Character:FindFirstChild(itemName) then
+                return
+            end
         end
     end
     task.wait(0.1)
