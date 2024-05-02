@@ -662,7 +662,7 @@ Brew:AddToggle({
             if recipe then
                 local canBrew = true
                 for _, ingredient in ipairs(recipe) do
-                    local itemName, _ = unpack(ingredient)
+                    local itemName = unpack(ingredient)
                     if not lp.Backpack.Tools:FindFirstChild(itemName) then
                         canBrew = false
                         OrionLib:MakeNotification({
