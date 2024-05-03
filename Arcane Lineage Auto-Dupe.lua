@@ -2,7 +2,8 @@ repeat
     wait()
 until game:IsLoaded()
 
-task.wait(5)
+task.wait(10)
+print("first wait")
 
 -- Not my adonis bypasses - Everything else made by me (OneFool)
 for _, v in pairs(getgc(true)) do
@@ -26,6 +27,7 @@ end
 -- End Adonis Bypasses
 
 task.wait(3)
+print("2nd wait")
 
 -- Client AntiKick
 OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
@@ -37,8 +39,10 @@ OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
 end))
 
 task.wait(0.5)
+print("3rd wait")
 
 -- Main Code
+print("main code executed")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TeleportService = game:GetService("TeleportService")
@@ -59,10 +63,10 @@ end
 -- IMPORTANT: YOU MUST HAVE THE PLAYER YOU'RE DUPING ITEMS TO LOADED IN SO JUST BE IN THE SAME AREA OF THE MAP AS THEM BEFORE USING SCRIPT.
 -- IMPORTANT: YOU MUST HAVE THIS SCRIPT IN YOUR AUTO-EXECUTE FOLDER FOR THIS TO BE AUTOMATIC. | maybe will use queue_on_teleport soon but seemed to have some crashes
 getgenv().Enabled = true            -- Change to false to disable
-getgenv().target = ""          -- Exact username of the player you want to drop items to between the ""
+getgenv().target = "qmvzr"          -- Exact username of the player you want to drop items to between the ""
 getgenv().distancefrmplr = 3        -- The distance you are from the player after tping, don't change this unless you're experiencing problems
-getgenv().itemtodrop = "" -- Exact name of the item you want to drop between the ""
-getgenv().amountToDrop = 20         -- Amount of the item to drop, Dropping more than 50 of an item may result in the dupe not working
+getgenv().itemtodrop = "Heartbreaking Elixir" -- Exact name of the item you want to drop between the ""
+getgenv().amountToDrop = 5         -- Amount of the item to drop, Dropping more than 50 of an item may result in the dupe not working
 --]]
 
 while Enabled do
@@ -93,6 +97,7 @@ while Enabled do
 
         TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
     else
+        print("else triggered")
         task.wait(5)
     end
 end
