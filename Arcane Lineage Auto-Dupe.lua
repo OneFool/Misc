@@ -48,6 +48,18 @@ local function DropItemToPlayer(itemName)
     end
 end
 
+--[[
+-- AUTO DUPE SETTINGS
+
+-- IMPORTANT: YOU MUST HAVE THE PLAYER YOU'RE DUPING ITEMS TO LOADED IN SO JUST BE IN THE SAME AREA OF THE MAP AS THEM BEFORE USING SCRIPT.
+-- IMPORTANT: YOU MUST HAVE THIS SCRIPT IN YOUR AUTO-EXECUTE FOLDER FOR THIS TO BE AUTOMATIC. | maybe will use queue_on_teleport soon but seemed to have some crashes
+getgenv().Enabled = true            -- Change to false to disable
+getgenv().target = ""          -- Exact username of the player you want to drop items to between the ""
+getgenv().distancefrmplr = 3        -- The distance you are from the player after tping, don't change this unless you're experiencing problems
+getgenv().itemtodrop = "" -- Exact name of the item you want to drop between the ""
+getgenv().amountToDrop = 20         -- Amount of the item to drop, Dropping more than 50 of an item may result in the dupe not working
+--]]
+
 while Enabled do
     task.wait()
     if Players:FindFirstChild(target) then
