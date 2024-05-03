@@ -130,7 +130,7 @@ local function brewPotion(recipe)
             end
         end
     end
-    task.wait(0.1)
+    task.wait()
     getclicker()
 end
 
@@ -663,7 +663,7 @@ Brew:AddToggle({
             lp.Character.HumanoidRootPart.CFrame = CFrame.new(2659.95288, 389.135986, -3946.76294, 0.993850768,
                 4.01330915e-08, 0.110727936, -4.54039046e-08, 1, 4.50799895e-08, -0.110727936, -4.98302626e-08,
                 0.993850768)
-            task.wait(0.5)
+            task.wait(0.3)
 
             local recipe = potionRecipes[Potion]
             if recipe then
