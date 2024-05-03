@@ -1,7 +1,8 @@
 repeat
     wait()
 until game:IsLoaded()
-wait()
+
+task.wait(5)
 
 -- Not my adonis bypasses - Everything else made by me (OneFool)
 for _, v in pairs(getgc(true)) do
@@ -24,7 +25,7 @@ for _, v in next, getgc() do
 end
 -- End Adonis Bypasses
 
-task.wait(3)
+task.wait(0.5)
 
 -- Client AntiKick
 OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
