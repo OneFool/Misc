@@ -29,7 +29,7 @@ for _, v in next, getgc() do
 end
 -- End Adonis Bypasses
 
-task.wait(3)
+task.wait(2)
 print("2nd wait")
 
 -- Client AntiKick
