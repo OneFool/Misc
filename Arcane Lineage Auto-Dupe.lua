@@ -2,7 +2,10 @@ repeat
     wait()
 until game:IsLoaded()
 
-task.wait(10)
+
+-- getgenv().delay = 10 -- Delay before execution on rejoin | Setting this to low may result in you getting kicked!
+
+task.wait(tonumber(delay))
 print("first wait")
 
 -- Not my adonis bypasses - Everything else made by me (OneFool)
@@ -63,10 +66,10 @@ end
 -- IMPORTANT: YOU MUST HAVE THE PLAYER YOU'RE DUPING ITEMS TO LOADED IN SO JUST BE IN THE SAME AREA OF THE MAP AS THEM BEFORE USING SCRIPT.
 -- IMPORTANT: YOU MUST HAVE THIS SCRIPT IN YOUR AUTO-EXECUTE FOLDER FOR THIS TO BE AUTOMATIC. | maybe will use queue_on_teleport soon but seemed to have some crashes
 getgenv().Enabled = true            -- Change to false to disable
-getgenv().target = "qmvzr"          -- Exact username of the player you want to drop items to between the ""
+getgenv().target = ""          -- Exact username of the player you want to drop items to between the ""
 getgenv().distancefrmplr = 3        -- The distance you are from the player after tping, don't change this unless you're experiencing problems
-getgenv().itemtodrop = "Heartbreaking Elixir" -- Exact name of the item you want to drop between the ""
-getgenv().amountToDrop = 5         -- Amount of the item to drop, Dropping more than 50 of an item may result in the dupe not working
+getgenv().itemtodrop = "" -- Exact name of the item you want to drop between the ""
+getgenv().amountToDrop = 28       -- Amount of the item to drop, Dropping more than 50 of an item may result in the dupe not working
 --]]
 
 while Enabled do
@@ -79,21 +82,18 @@ while Enabled do
         lpc:SetPrimaryPartCFrame(CFrame.new(teleportPosition, targetPosition))
         task.wait(0.2)
 
-        local ohNumber1 = 1
-        local ohTable2 = {
-            ["1"] = "\237\190\140"
-        }
-        ReplicatedStorage.Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
+        local t = os.clock()
 
-        task.wait()
-
-        local droppedCount = 0
         repeat
             task.wait()
+            local ohNumber1 = 1
+            local ohTable2 = {
+                ["1"] = "\237\190\140"
+            }
+            ReplicatedStorage.Remotes.Data.UpdateHotbar:FireServer(ohNumber1, ohTable2)
             DropItemToPlayer(itemtodrop)
-            droppedCount = droppedCount + 1
-            task.wait(1)
-        until droppedCount >= amountToDrop
+        until os.clock() - t >= 20 or not lp.Backpack.Tools:FindFirstChild(itemtodrop)
+
 
         TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
     else
