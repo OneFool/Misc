@@ -98,6 +98,6 @@ while Enabled do
         TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
     else
         print("else triggered")
-        task.wait(5)
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
     end
 end
