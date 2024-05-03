@@ -25,17 +25,6 @@ for _, v in next, getgc() do
 end
 -- End Adonis Bypasses
 
-task.wait(0.5)
-
--- Client AntiKick
-OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
-    if not checkcaller() and string.lower(getnamecallmethod()) == "kick" then
-        return nil
-    end
-
-    return OldNamecall(...)
-end))
-
 -- Main Code
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
