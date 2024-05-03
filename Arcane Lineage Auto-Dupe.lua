@@ -8,7 +8,6 @@ getgenv().Enabled = true            -- Change to false to disable
 getgenv().target = ""          -- Exact CaSe SeNsItIvE username of the player you want to drop items to between the ""
 getgenv().distancefrmplr = 3        -- The distance you are from the player after tping, don't change this unless you're experiencing problems
 getgenv().itemtodrop = "" -- Exact name of the item you want to drop between the ""
-getgenv().amountToDrop = 25         -- Amount of the item to drop, Dropping more than 30 of an item may result in the dupe not working
 getgenv().delay = 10 -- Delay before execution on rejoin | Setting this to low may result in you getting kicked!
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/OneFool/Misc/main/Arcane%20Lineage%20Auto-Dupe.lua"))()
