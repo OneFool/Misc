@@ -66,6 +66,14 @@ local potionRecipes = {
     ["Invisibility Potion"] = { { "Driproot", 1 }, { "Hightail", 1 }, { "Haze Chunk", 1 } },
     ["Light of Grace"] = { { "Phoenix Tear", 1 }, { "Crylight", 1 }, { "Haze Chunk", 1 }, { "Sand Core", 1 }, { "Driproot", 1 } }
 }
+local basetrainers = { "Ysa (Warrior Base)", "Boots (Thief Base)", "Tivek (Spear Base)", "Arandor (Wizard Base)",
+    "Doran (Fist Base)" }
+local orderlysupertrainers = { "Monk Trainer", "Paladin Trainer", "Saint Trainer", "Ranger Trainer",
+    "Elementalist Trainer" }
+local neutralsupertrainers = { "Brawler Trainer", "Blade Dancer Trainer", "Lancer Trainer", "Rogue Trainer",
+    "Hexer Trainer" }
+local chaoticsupertrainers = { "Dark Wraith Trainer", "Berserker Trainer", "Impaler Trainer", "Assassin Trainer",
+    "Necromancer Trainer" }
 local NPCList = {}
 local QuestNPCList = {}
 local Moves = {}
@@ -73,7 +81,8 @@ local Items = {}
 local DuplicateItems = {}
 local AntiDupeItems = { "Sneak", "Bestiary", "Pickaxe" }
 local lp = game:GetService("Players").LocalPlayer
-local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3" }
+local BlacklistedNPC = { "Quest", "Filler", "Aretim", "PurgNPC", "ExampleNPC", "Pup 1", "Pup 2", "Pup 3", "SlimeStatue3",
+    "Ysa", "Boots", "Tivek", "Arandor", "Doran" }
 Boolerean = nil
 local orgwalk = lp.Character:FindFirstChildWhichIsA("Humanoid").WalkSpeed
 local orgjump = lp.Character:FindFirstChildWhichIsA("Humanoid").JumpPower
@@ -130,7 +139,7 @@ local function brewPotion(recipe)
             end
         end
     end
-    task.wait()
+    task.wait(0.1)
     getclicker()
 end
 
@@ -767,6 +776,162 @@ Teleports:AddDropdown({
 })
 
 Teleports:AddDropdown({
+    Name = "Base Class Trainers",
+    Default = "",
+    Options = basetrainers,
+    Callback = function(Value)
+        if Value == "Ysa (Warrior Base)" then
+            local CFrameEnd = CFrame.new(-472.791016, 42.894043, -3285.57422)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Boots (Thief Base)" then
+            local CFrameEnd = CFrame.new(-422.817841, 42.894043, -3527)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Tivek (Spear Base)" then
+            local CFrameEnd = CFrame.new(657.665283, 99.1655655, -3987.02319)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Arandor (Wizard Base)" then
+            local CFrameEnd = CFrame.new(591.249634, 124.134979, -3608.24951)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Doran (Fist Base)" then
+            local CFrameEnd = CFrame.new(486.700226, 116.525238, -2655.08179)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        end
+    end
+})
+
+Teleports:AddDropdown({
+    Name = "Orderly Super Trainers",
+    Default = "",
+    Options = orderlysupertrainers,
+    Callback = function(Value)
+        if Value == "Monk Trainer" then
+            local CFrameEnd = CFrame.new(-1693.1698, 112.045654, -2943.5459)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Paladin Trainer" then
+            local CFrameEnd = CFrame.new(-2515.79541, 42.6970634, -2959.91772)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Saint Trainer" then
+            local CFrameEnd = CFrame.new(-3587.05225, 42.6970673, -3153.79883)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Ranger Trainer" then
+            local CFrameEnd = CFrame.new(2590.25488, 386.349731, -3175.85303)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Elementalist Trainer" then
+            local CFrameEnd = CFrame.new(-2572.16187, 42.6970711, -2486.91895)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        end
+    end
+})
+
+Teleports:AddDropdown({
+    Name = "Neutral Super Trainers",
+    Default = "",
+    Options = neutralsupertrainers,
+    Callback = function(Value)
+        if Value == "Brawler Trainer" then
+            local CFrameEnd = CFrame.new(235.279037, 94.5629883, -4652.14355)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Blade Dancer Trainer" then
+            local CFrameEnd = CFrame.new(61.2550659, 113.062515, -5365.60693)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Lancer Trainer" then
+            local CFrameEnd = CFrame.new(-58.3252258, 159.062424, -5605.7793)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Rogue Trainer" then
+            local CFrameEnd = CFrame.new(-2505.34204, 42.7966499, -2860.40381)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Hexer Trainer" then
+            local CFrameEnd = CFrame.new(-660.072388, 42.6968689, -4195.70752)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        end
+    end
+})
+
+Teleports:AddDropdown({
+    Name = "Chaotic Super Trainers",
+    Default = "",
+    Options = chaoticsupertrainers,
+    Callback = function(Value)
+        if Value == "Dark Wraith Trainer" then
+            local CFrameEnd = CFrame.new(1964.64673, 23.9373341, -1436.88989)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Berserker Trainer" then
+            local CFrameEnd = CFrame.new(5350.03174, -91.6057739, -3256.1272)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Impaler Trainer" then
+            local CFrameEnd = CFrame.new(2321.18872, 386.629517, -3622.46436)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Assassin Trainer" then
+            local CFrameEnd = CFrame.new(1181.34607, -8.18032455, -2311.11279)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        elseif Value == "Necromancer Trainer" then
+            local CFrameEnd = CFrame.new(5950.45703, 52.2517128, -2857.26343)
+            local Time = 0
+            local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+                TweenInfo.new(Time), { CFrame = CFrameEnd })
+            tween:Play()
+        end
+    end
+})
+
+Teleports:AddDropdown({
     Name = "Quest NPC's",
     Default = "",
     Options = QuestNPCList,
@@ -945,6 +1110,15 @@ local id = Misc:AddDropdown({
         Item = Value
     end
 })
+
+--[[
+Misc:AddButton({
+    Name = "Drop Inventory",
+    Callback = function()
+        print("soon")
+    end
+})
+--]]
 
 Misc:AddButton({
     Name = "Rejoin",
